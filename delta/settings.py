@@ -25,7 +25,7 @@ SECRET_KEY = '*70d2^$@3+_zbq02#a_rx4wlqg0e*$fp@#-d*but=b2sa4b5+7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['delta-peru.herokuapp.com']
 
 
 # Application definition
