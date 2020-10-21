@@ -1,0 +1,37 @@
+{% extends "basehome.html" %}{% load static %}
+
+{% block head_content %}
+<title>Delta</title>
+{% endblock %}
+
+{% block container %}
+<div class="row h-100 justify-content-center align-items-center">
+    <div class="col-sm-12 col-md-5 col-lg-5 pt-2 pl-5 pr-5 pb-5" id="auth-container">
+        <img src="{% static "img/logo-black.png" %}" class="img-fluid rounded mx-auto d-block pb-4" style="max-width: 60%;">
+    {% if error %}
+    <p class="alert alert-danger">{{ error }}</p>
+       
+    {% endif%}
+
+
+    <form method="POST" action="{% url "users:login" %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <input type="text" placeholder="Username" name="username" class="form-control">
+        </div>
+        <div class="form-group">
+            <input type="password" placeholder="Password" name="password" class="form-control">
+        </div>
+
+        <button class="btn btn-primary btn-block mt-5" type="submit">Sign in!</button>
+
+
+
+    </form>
+
+    <p class="mt-4">Don't have an account yet? <a href="{% url 'users:signup' %}">Sign up her.</a> </p>
+
+</div>
+</div>
+{% endblock %}

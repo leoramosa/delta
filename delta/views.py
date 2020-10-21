@@ -9,4 +9,4 @@ import json
 
 
 class Home(TemplateView):
-    template_name = 'base.html'
+    template_name = 'home.html'

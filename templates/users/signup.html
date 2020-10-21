@@ -1,0 +1,81 @@
+{% extends "basehome.html" %} {% block head_content %}{% load static %}
+<title>Delta sign up</title>
+{% endblock %} {% block container %} {% if error %}
+<p class="alert alert-danger">{{ error }}</p>
+{% endif %}
+<div class="row h-100 justify-content-center align-items-center">
+  <div class="col-sm-12 col-md-5 col-lg-5 pt-2 pl-5 pr-5 pb-5" id="auth-container">
+    <img src="{% static "img/logo-black.png" %}" class="img-fluid rounded mx-auto d-block pb-4" style="max-width: 60%;">
+<form action="{% url 'users:signup' %}" method="POST">
+  {% csrf_token %}
+
+  {{ form.as_p }}
+
+ <!--  eliminamos el html para usar form de django -->
+  <!-- <div class="form-group">
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Username"
+      name="username"
+      required="true"
+    />
+  </div>
+
+  <div class="form-group">
+    <input
+      class="form-control"
+      type="password"
+      placeholder="Password"
+      name="passwd"
+      required="true"
+    />
+  </div>
+
+  <div class="form-group">
+    <input
+      class="form-control"
+      type="password"
+      placeholder="Password confirmation"
+      name="passwd_confirmation"
+      required="true"
+    />
+  </div>
+
+  <div class="form-group">
+    <input
+      class="form-control"
+      type="text"
+      placeholder="First name"
+      name="first_name"
+      required="true"
+    />
+  </div>
+
+  <div class="form-group">
+    <input
+      class="form-control"
+      type="text"
+      placeholder="Last name"
+      name="last_name"
+      required="true"
+    />
+  </div>
+
+  <div class="form-group">
+    <input
+      class="form-control"
+      type="email"
+      placeholder="Email address"
+      name="email"
+      required="true"
+    />
+  </div> -->
+
+  <button class="btn btn-primary btn-block mt-5" type="submit">
+    Register!
+  </button>
+</form>
+  </div>
+</div>
+{% endblock %}

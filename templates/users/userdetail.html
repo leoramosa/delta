@@ -1,5 +1,5 @@
-{% extends "basehome.html" %}
-
+{% extends "baseuser.html" %}
+{% load static %}
 {% block head_content %}
 <title>Delta | @{{ user.username }}  </title>
 {% endblock %}
@@ -10,6 +10,7 @@
         <div class="row">
 
             <div class="col-sm-4 d-flex justify-content-center">
+                
                 <img
                     src="{{ user.profile.picture.url }}"
                     alt="@{{ user.username}}"

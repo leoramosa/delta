@@ -1,44 +1,18 @@
-"""Users views."""
-
-# Django
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse, reverse_lazy
-from django.views.generic import DetailView, FormView, UpdateView, TemplateView
+from django.views.generic import DetailView, FormView, UpdateView
 
 # Models
 from django.contrib.auth.models import User
 from users.models import Profile
-
 # Forms
-from users.forms import SignupForm
+from users.forms import ProfileForm, SignupForm
 
 
-class UserDetailInterView(DetailView):
-    """ User Detail View """
-
-    template_name = 'users/userdetail.html'
-    slug_field = 'username'
-    slug_url_kwarg = 'username'
-    queryset = User.objects.all()
-    context_object_name = 'user'
-
-
-class UserDetailView(DetailView):
-    """ User Detail View """
-
-    template_name = 'userpublic.html'
-    slug_field = 'username'
-    slug_url_kwarg = 'username'
-    queryset = User.objects.all()
-    context_object_name = 'user'
-
-
-class Feed(TemplateView):
-    template_name = 'users/feed.html'
-
+# Create your views here.
 
 class SignupView(FormView):
     """Users sign up view."""
@@ -71,22 +45,42 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
 
 
 def login_view(request):
-    """Login view."""
+    """ login views """
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user:
             login(request, user)
-            return redirect('users:feed')
+            return redirect('home')
         else:
-            return render(request, 'users/login.html', {'error': 'Invalid username and password'})
+            return render(request, 'users/login.html', {'error': 'invalid username and password'})
 
     return render(request, 'users/login.html')
 
 
-@login_required
+@ login_required
 def logout_view(request):
-    """Logout a user."""
+    """ logout a user """
     logout(request)
-    return redirect('home')
+    return redirect('users:login')
+
+
+class UserDetailInterView(DetailView):
+    """ User Detail View """
+
+    template_name = 'users/userdetail.html'
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
+    queryset = User.objects.all()
+    context_object_name = 'user'
+
+
+class UserDetailView(DetailView):
+    """ User Detail View """
+
+    template_name = 'userpublic.html'
+    slug_field = 'username'
+    slug_url_kwarg = 'username'
+    queryset = User.objects.all()
+    context_object_name = 'user'
