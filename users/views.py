@@ -67,7 +67,7 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
     def get_success_url(self):
         """Return to user's profile."""
         username = self.object.user.username
-        return reverse('users:detailinter', kwargs={'username': username})
+        return reverse('users:feed', kwargs={'username': username})
 
 
 def login_view(request):
